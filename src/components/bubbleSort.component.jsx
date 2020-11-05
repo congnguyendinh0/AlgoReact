@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Sketch from "react-p5";
 
-//create a random array
+// note: this component is react-p5 rather than react-p5-wrapper
+// Challenge: how to create a random array when btn click
 
-// TO-DO:
-// 1. STUDY THE BUILT IN FUNCTION IN P5.JS
-// 2. HOW TO INTEGRATE P5 WITH REACT
-// Challenge: how to write a function inside the draw function
-
-// 3. HOW TO MANIPULATE ARRAY WITH HOOKS OR REDUX OR CONTEXT API
-// 4. HOW TO SET TIME OUT IN P5.js and React
+// HOW TO MANIPULATE ARRAY WITH HOOKS OR REDUX OR CONTEXT API
+// HOW TO async function
 
 const BubbleSort = ({ isStart }) => {
   //const [arr, setArr] = useState([]);
@@ -70,18 +66,8 @@ const BubbleSort = ({ isStart }) => {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
-  const randomize = () => {
-    let newArr = [];
-    for (let i = 0; i < 10; i++) {
-      let newItem = getRandomInt(5, 150);
-      newArr.push(newItem);
-    }
-    //setArr((arr) => [...arr, ...newArr]);
-    //console.log(arr, "what is arr in randomize fn");
-  };
-
-  // solution perhaps: pass in a random array when initiazize the canvas
-  // randomize array has to be stored somewhere else? redux? and can be generated on btn click
+  // perhaps: pass in a random array when initiazize the canvas
+  // randomize array has to be stored somewhere else? redux? and can be generated on btn click?
   const draw = (p5) => {
     p5.background(50);
     for (let i = 0; i < 10; i++) {
@@ -90,7 +76,6 @@ const BubbleSort = ({ isStart }) => {
       p5.stroke(100);
     }
 
-    //bubble sort - how to call this function only when btn click
     let i = 0;
     let j = 0;
     for (let k = 0; k < 50; k++) {
@@ -110,18 +95,6 @@ const BubbleSort = ({ isStart }) => {
         p5.noLoop();
       }
     }
-    //animating bubblesort
-    // how to slow down animation
-    // const sleep = (milliseconds) => {
-    //   return new Promise((resolve) => setTimeout(resolve, milliseconds));
-    // };
-    // const list = [1, 2, 3, 4];
-    // const doSomething = async () => {
-    //   for (const item of list) {
-    //     await sleep(1000);
-    //     console.log("🦄");
-    //   }
-    // };
 
     if (isStart) {
       for (let i = 0; i < 50; i++) {
