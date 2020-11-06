@@ -29,6 +29,7 @@ const styles = {
 const Navbar = (props) => {
   const { classes, className } = props;
   const [start, setStart] = useState(false);
+  const [toggleSpeed, setToggleSpeed] = useState(false);
 
   return (
     <>
@@ -44,14 +45,14 @@ const Navbar = (props) => {
           </Button>
           <Button
             className={clsx(classes.root, className)}
-            onClick={() => setStart((start) => !start)}
+            onClick={() => setToggleSpeed((toggleSpeed) => !toggleSpeed)}
           >
-            Sort
+            Speed Toggle
           </Button>
         </Box>
       </div>
 
-      <DiagramContainer isStart={start} />
+      <DiagramContainer isStart={start} toggleSpeed={toggleSpeed} />
     </>
   );
 };

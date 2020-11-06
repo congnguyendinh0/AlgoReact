@@ -1,15 +1,17 @@
 let values = [];
 let w = 10;
 let states = [];
+var speed = 500; // adjust this variable for the animation speed ; use var because it is function scope
+
 // p5.js setup function only runs once
 // draw function will run continuously aka infinite loop
-// using noloop freeze the animation
+
 export default function sketch(p) {
   let isStart;
-  //let speed;
-
+  //let pg;
   p.setup = function (props) {
     p.createCanvas(400, 400);
+    //pg = p.createGraphics(200, 200);
     values = new Array(400 / w);
     for (let i = 0; i < values.length; i++) {
       values[i] = p.random(400);
@@ -63,7 +65,7 @@ export default function sketch(p) {
   // challenge: how to dynamically change the speed
   // how to pass the props into this function
   async function swap(arr, a, b) {
-    await sleep(150);
+    await sleep(speed);
     let temp = arr[a];
     arr[a] = arr[b];
     arr[b] = temp;
@@ -81,31 +83,42 @@ export default function sketch(p) {
       p.stroke(100);
     }
     p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
-      if (props.isStart === true) {
+      if (props.toggleSpeed === true) {
         isStart = true;
-        //speed = props.speed;
+        speed = props.speed; // props.speed = 120 animation will be faster
       } else {
         isStart = false;
-        //speed = 120;
+        speed = 500;
       }
     };
 
     if (isStart) {
-      for (let i = 0; i < values.length; i++) {
-        if (states[i] === 0) {
-          p.fill("#E0777D");
-        } else if (states[i] === 1) {
-          p.fill("#D6FFB7");
-        } else {
-          p.fill("rgba(210,232,232,0.9)");
-        }
-        p.rect(i * w, p.height - values[i], w, values[i], 25);
-      }
-    } else {
-      //quickSort(values, 0, values.length - 1);
-      // p.noLoop();
-      //calling quicksort here results in wrong incomplete output
+      console.log("isStart is true");
     }
+    for (let i = 0; i < values.length; i++) {
+      if (states[i] === 0) {
+        p.fill("#E0777D");
+      } else if (states[i] === 1) {
+        p.fill("#D6FFB7");
+      } else {
+        p.fill("rgba(210,232,232,0.9)");
+      }
+      p.rect(i * w, p.height - values[i], w, values[i], 25);
+    }
+
+    // testing createGraphics
+    // pg = p.background("rgba(210,232,232,0.1)");
+    // pg = p.ellipse(pg.width / 4, pg.height / 4, 20, 20);
+  };
+
+  // testing p.remove will remove entire canvas
+  // p.doubleClicked = function () {
+  //   p.remove();
+  // };
+
+  // solution: simply call setup function again to rerun the quicksort function on doubleClick!
+  p.doubleClicked = function () {
+    p.setup();
   };
 }
 // end of sketch function
