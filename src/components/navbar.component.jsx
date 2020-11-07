@@ -1,10 +1,6 @@
 import React, { useState, useReducer } from "react";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-//import { spacing, palette } from "@material-ui/system";
+import {Box,Button,withStyles } from "@material-ui/core";
 import clsx from "clsx";
-import { withStyles } from "@material-ui/core/styles";
-
 import DiagramContainer from "./diagramContainer.component";
 
 // useReducer to handle state logic
