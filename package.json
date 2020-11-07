@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/system": "^4.9.14",
+    "fsevents": "^2.2.1",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
     "react-p5": "^1.3.6",
