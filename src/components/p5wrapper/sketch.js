@@ -2,14 +2,16 @@ let values = [];
 let w = 10;
 let states = [];
 var speed = 500; // adjust this variable for the animation speed ; use var because it is function scope
+var isStart;
 
 // p5.js setup function only runs once
 // draw function will run continuously aka infinite loop
+// settimeout doesn't work if inside set up function
 
 export default function sketch(p) {
-  let isStart;
   //let pg;
-  p.setup = function (props) {
+
+  p.setup = function () {
     p.createCanvas(400, 400);
     //pg = p.createGraphics(200, 200);
     values = new Array(400 / w);
@@ -17,7 +19,6 @@ export default function sketch(p) {
       values[i] = p.random(400);
       states[i] = -1;
     }
-    //console.log(isStart, "what is isStart when setup fn is called");
     quickSort(values, 0, values.length - 1);
   };
 
@@ -93,7 +94,8 @@ export default function sketch(p) {
     };
 
     if (isStart) {
-      console.log("isStart is true");
+      //console.log(isStart, "what is isStart in draw");
+      //quickSort(values, 0, values.length - 1);
     }
     for (let i = 0; i < values.length; i++) {
       if (states[i] === 0) {
@@ -119,6 +121,14 @@ export default function sketch(p) {
   // solution: simply call setup function again to rerun the quicksort function on doubleClick!
   p.doubleClicked = function () {
     p.setup();
+  };
+
+  // weird behavior whenever calling setimeout on  quicksort
+  p.mousePressed = function (e) {
+    // console.log(e, "mouse pressed event");
+    // if (e.target.id === "generate") {
+    //   setTimeout(quickSort(values, 0, values.length - 1), 500);
+    // }
   };
 }
 // end of sketch function

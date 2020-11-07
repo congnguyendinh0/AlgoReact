@@ -1,5 +1,5 @@
 import React, { useState, useReducer } from "react";
-import {Box,Button,withStyles } from "@material-ui/core";
+import { Box, Button, withStyles } from "@material-ui/core";
 import clsx from "clsx";
 import DiagramContainer from "./diagramContainer.component";
 
@@ -31,7 +31,9 @@ const Navbar = (props) => {
     <>
       <div style={{ marginBottom: "25px" }}>
         <Box p={2} bgcolor="text.secondary">
+          {/* <button id="generate">my button</button> */}
           <Button
+            id="generate"
             m={2}
             variant="contained"
             color="primary"
