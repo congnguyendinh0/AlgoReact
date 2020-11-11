@@ -1,9 +1,7 @@
 import React from "react";
-//import Diagram from "./diagram.component";
 import Grid from "@material-ui/core/Grid";
-
-import BubbleSort from "./bubbleSort.component";
-import P5WrapperContainer from "./p5wrapper/P5Wrapper.component";
+import QuickSort from "./quick-sort/QuickSort.component";
+import BubbleSort from "./bubble-sort/BubbleSort.component";
 
 const DiagramContainer = ({ isStart, toggleSpeed }) => {
   return (
@@ -12,15 +10,14 @@ const DiagramContainer = ({ isStart, toggleSpeed }) => {
         <Grid container justify="center" spacing={2}>
           {[0, 1, 2].map((value) => (
             <Grid key={value} item>
-              <BubbleSort isStart={isStart} />
+              <BubbleSort isStart={isStart} toggleSpeed={toggleSpeed} />
             </Grid>
           ))}
         </Grid>
         <Grid container justify="center" spacing={2}>
           {[0, 1, 2].map((value) => (
             <Grid key={value} item>
-              {/* <Diagram isStart={isStart} /> */}
-              <P5WrapperContainer isStart={isStart} toggleSpeed={toggleSpeed} />
+              <QuickSort isStart={isStart} toggleSpeed={toggleSpeed} />
             </Grid>
           ))}
         </Grid>

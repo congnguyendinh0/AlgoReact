@@ -1,25 +1,26 @@
 let values = [];
 let w = 10;
 let states = [];
-var speed = 500; // adjust this variable for the animation speed ; use var because it is function scope
+var speed = 500;
 var isStart;
 
-// p5.js setup function only runs once
-// draw function will run continuously aka infinite loop
-// settimeout doesn't work if inside set up function
-
 export default function sketch(p) {
-  //let pg;
-
   p.setup = function () {
     p.createCanvas(400, 400);
-    //pg = p.createGraphics(200, 200);
     values = new Array(400 / w);
     for (let i = 0; i < values.length; i++) {
       values[i] = p.random(400);
       states[i] = -1;
     }
     quickSort(values, 0, values.length - 1);
+
+    // p.mousePressed = function (e) {
+    //   if (e.target.id === "quicksort") {
+    //     quickSort(values, 0, values.length - 1);
+    //   }
+    // };
+
+    // however, when mousepress on the screen outside the sort btn the quick sort function will stop
   };
 
   async function quickSort(arr, start, end) {
@@ -62,9 +63,6 @@ export default function sketch(p) {
     return pivotIndex;
   }
 
-  //changing value for the sleep function will adjust animation speed
-  // challenge: how to dynamically change the speed
-  // how to pass the props into this function
   async function swap(arr, a, b) {
     await sleep(speed);
     let temp = arr[a];
@@ -86,17 +84,13 @@ export default function sketch(p) {
     p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
       if (props.toggleSpeed === true) {
         isStart = true;
-        speed = props.speed; // props.speed = 120 animation will be faster
+        speed = props.speed;
       } else {
         isStart = false;
         speed = 500;
       }
     };
 
-    if (isStart) {
-      //console.log(isStart, "what is isStart in draw");
-      //quickSort(values, 0, values.length - 1);
-    }
     for (let i = 0; i < values.length; i++) {
       if (states[i] === 0) {
         p.fill("#E0777D");
@@ -107,18 +101,9 @@ export default function sketch(p) {
       }
       p.rect(i * w, p.height - values[i], w, values[i], 25);
     }
-
-    // testing createGraphics
-    // pg = p.background("rgba(210,232,232,0.1)");
-    // pg = p.ellipse(pg.width / 4, pg.height / 4, 20, 20);
   };
 
-  // testing p.remove will remove entire canvas
-  // p.doubleClicked = function () {
-  //   p.remove();
-  // };
-
-  // solution: simply call setup function again to rerun the quicksort function on doubleClick!
+  // call setup function again to rerun the quicksort function on doubleClick!
   p.doubleClicked = function () {
     p.setup();
   };

@@ -61,13 +61,6 @@ const BubbleSort = ({ isStart }) => {
     900,
   ];
 
-  const getRandomInt = (min, max) => {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
-  // perhaps: pass in a random array when initiazize the canvas
-  // randomize array has to be stored somewhere else? redux? and can be generated on btn click?
   const draw = (p5) => {
     p5.background(50);
     for (let i = 0; i < 10; i++) {

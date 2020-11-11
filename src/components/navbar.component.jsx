@@ -31,9 +31,7 @@ const Navbar = (props) => {
     <>
       <div style={{ marginBottom: "25px" }}>
         <Box p={2} bgcolor="text.secondary">
-          {/* <button id="generate">my button</button> */}
           <Button
-            id="generate"
             m={2}
             variant="contained"
             color="primary"
