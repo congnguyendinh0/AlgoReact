@@ -23,7 +23,7 @@ const styles = {
 };
 
 const Navbar = (props) => {
-  const { classes, className } = props;
+  const { classes, className } = props; // for material UI
   const [start, setStart] = useState(false);
   const [toggleSpeed, setToggleSpeed] = useState(false);
 
@@ -37,7 +37,7 @@ const Navbar = (props) => {
             color="primary"
             onClick={() => setStart((start) => !start)}
           >
-            Generate
+            Start Sort
           </Button>
           <Button
             className={clsx(classes.root, className)}

@@ -1,17 +1,17 @@
-let values = [];
 let w = 10;
 let states = [];
 var speed = 500;
 var isStart;
+var values = [];
 
 export default function sketch(p) {
   p.setup = function () {
     p.createCanvas(400, 400);
-    values = new Array(400 / w);
-    for (let i = 0; i < values.length; i++) {
-      values[i] = p.random(400);
-      states[i] = -1;
-    }
+    // values = new Array(400 / w);
+    // for (let i = 0; i < values.length; i++) {
+    //   values[i] = p.random(400);
+    //   states[i] = -1;
+    // }
     quickSort(values, 0, values.length - 1);
 
     // p.mousePressed = function (e) {
@@ -83,11 +83,24 @@ export default function sketch(p) {
     }
     p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
       if (props.toggleSpeed === true) {
-        isStart = true;
         speed = props.speed;
       } else {
-        isStart = false;
         speed = 500;
+      }
+
+      if (props.isStart) {
+        isStart = true;
+      } else {
+        isStart = false;
+      }
+
+      // pass in randomized array on button click
+      if (props.array.length) {
+        values = props.array;
+      }
+      // start sorting only on button click
+      if (isStart) {
+        p.setup();
       }
     };
 
@@ -104,9 +117,9 @@ export default function sketch(p) {
   };
 
   // call setup function again to rerun the quicksort function on doubleClick!
-  p.doubleClicked = function () {
-    p.setup();
-  };
+  // p.doubleClicked = function () {
+  //   p.setup();
+  // };
 
   // weird behavior whenever calling setimeout on  quicksort
   p.mousePressed = function (e) {

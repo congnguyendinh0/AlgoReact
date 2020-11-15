@@ -108,8 +108,8 @@ export default function sketch(p) {
     // above code works!
   };
 
-  p.doubleClicked = function () {
-    p.setup();
-  };
+  // p.doubleClicked = function () {
+  //   p.setup();
+  // };
 }
 // end of sketch function
