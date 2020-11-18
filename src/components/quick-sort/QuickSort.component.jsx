@@ -1,15 +1,16 @@
 import P5Wrapper from "react-p5-wrapper";
-import React from "react";
+import React, { useState } from "react";
 import sketch from "./sketch.js";
 
-const QuickSort = ({ isStart, toggleSpeed }) => {
+const QuickSort = ({ isStart, toggleSpeed, array }) => {
   return (
     <>
       <P5Wrapper
         sketch={sketch}
         isStart={isStart}
         toggleSpeed={toggleSpeed}
-        speed={20}
+        array={array}
+        speed={10}
       ></P5Wrapper>
     </>
   );

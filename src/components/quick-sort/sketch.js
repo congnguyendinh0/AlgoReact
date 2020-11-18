@@ -1,28 +1,66 @@
-let values = [];
 let w = 10;
 let states = [];
-var speed = 500;
+var speed = 50000;
 var isStart;
-
+var values = [];
 export default function sketch(p) {
   p.setup = function () {
     p.createCanvas(400, 400);
-    values = new Array(400 / w);
-    for (let i = 0; i < values.length; i++) {
-      values[i] = p.random(400);
-      states[i] = -1;
-    }
-    quickSort(values, 0, values.length - 1);
-
-    // p.mousePressed = function (e) {
-    //   if (e.target.id === "quicksort") {
-    //     quickSort(values, 0, values.length - 1);
-    //   }
-    // };
-
-    // however, when mousepress on the screen outside the sort btn the quick sort function will stop
+    //quickSort(values, 0, values.length - 1);
+    //quickSort2(values, 0, values.length - 1);
   };
 
+  // regular quickSort - if no async await - the result is sorted - no animation
+  // temp solution is to use setTimeout on quickSort
+  // however the animation doesn't look good
+  function quickSort2(arr, start, end) {
+    setTimeout(() => {
+      if (start >= end) {
+        return;
+      }
+      let index = partition2(arr, start, end);
+      states[index] = -1;
+
+      quickSort2(arr, start, index - 1);
+      quickSort2(arr, index + 1, end);
+    }, speed);
+  }
+  function partition2(arr, start, end) {
+    for (let i = start; i < end; i++) {
+      states[i] = 1;
+    }
+
+    let pivotValue = arr[end];
+    let pivotIndex = start;
+    states[pivotIndex] = 0;
+
+    for (let i = start; i < end; i++) {
+      if (arr[i] < pivotValue) {
+        swap2(arr, i, pivotIndex);
+
+        states[pivotIndex] = -1;
+        pivotIndex++;
+        states[pivotIndex] = 0;
+      }
+    }
+    swap2(arr, pivotIndex, end);
+
+    for (let i = start; i < end; i++) {
+      if (i !== pivotIndex) {
+        states[i] = -1;
+      }
+    }
+
+    return pivotIndex;
+  }
+
+  function swap2(arr, a, b) {
+    let temp = arr[a];
+    arr[a] = arr[b];
+    arr[b] = temp;
+  }
+
+  // async
   async function quickSort(arr, start, end) {
     if (start >= end) {
       return;
@@ -82,12 +120,27 @@ export default function sketch(p) {
       p.stroke(100);
     }
     p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
-      if (props.toggleSpeed === true) {
-        isStart = true;
+      if (props.toggleSpeed) {
         speed = props.speed;
       } else {
-        isStart = false;
         speed = 500;
+      }
+
+      if (props.isStart) {
+        isStart = true;
+      } else {
+        isStart = false;
+      }
+      // quickSort - wrong result ;
+      if (isStart) {
+        //p.setup();
+        //quickSort(values, 0, values.length - 1);
+        quickSort2(values, 0, values.length - 1);
+      }
+
+      // pass in randomized array on button click
+      if (props.array.length) {
+        values = props.array;
       }
     };
 
@@ -101,19 +154,6 @@ export default function sketch(p) {
       }
       p.rect(i * w, p.height - values[i], w, values[i], 25);
     }
-  };
-
-  // call setup function again to rerun the quicksort function on doubleClick!
-  p.doubleClicked = function () {
-    p.setup();
-  };
-
-  // weird behavior whenever calling setimeout on  quicksort
-  p.mousePressed = function (e) {
-    // console.log(e, "mouse pressed event");
-    // if (e.target.id === "generate") {
-    //   setTimeout(quickSort(values, 0, values.length - 1), 500);
-    // }
   };
 }
 // end of sketch function
