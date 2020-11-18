@@ -80,7 +80,7 @@ export default function sketch(p) {
         isStart = false;
       }
     };
-    // below code works
+    ///--------------------
     // but runs too fast
 
     // if (isStart) {
@@ -92,7 +92,7 @@ export default function sketch(p) {
     //   }
     // }
 
-    // above code works
+    ////-----------------------
 
     // alternative : try generator funnction below
     // how to adjust the speed with generator function

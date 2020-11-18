@@ -10,7 +10,7 @@ const QuickSort = ({ isStart, toggleSpeed, array }) => {
         isStart={isStart}
         toggleSpeed={toggleSpeed}
         array={array}
-        speed={20}
+        speed={10}
       ></P5Wrapper>
     </>
   );
