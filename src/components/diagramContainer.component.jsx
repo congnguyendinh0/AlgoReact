@@ -8,20 +8,22 @@ const DiagramContainer = ({ isStart, toggleSpeed, array }) => {
     <Grid container spacing={2} m={3}>
       <Grid item xs={12}>
         <Grid container justify="center" spacing={2}>
-          {[0, 1, 2].map((value) => (
-            <Grid key={value} item>
+          {["Bubble Sort", "Bubble Sort", "Bubble Sort"].map((value, id) => (
+            <Grid key={id} item>
               <BubbleSort isStart={isStart} toggleSpeed={toggleSpeed} />
+              <h2>{value}</h2>
             </Grid>
           ))}
         </Grid>
         <Grid container justify="center" spacing={2}>
-          {[0, 1, 2].map((value) => (
-            <Grid key={value} item>
+          {["Quick Sort", "Quick Sort", "Quick Sort"].map((value, id) => (
+            <Grid key={id} item>
               <QuickSort
                 isStart={isStart}
                 toggleSpeed={toggleSpeed}
                 array={array}
               />
+              <h2>{value}</h2>
             </Grid>
           ))}
         </Grid>
