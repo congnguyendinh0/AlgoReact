@@ -2,7 +2,9 @@ import React, { useState, useReducer } from "react";
 import { Box, Button, withStyles } from "@material-ui/core";
 import clsx from "clsx";
 import DiagramContainer from "./diagramContainer.component";
-
+import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
+import AutorenewIcon from "@material-ui/icons/Autorenew";
+import SpeedIcon from "@material-ui/icons/Speed";
 // useReducer to handle state logic
 
 const styles = {
@@ -13,7 +15,7 @@ const styles = {
     marginLeft: "50px",
     marginRight: "50px",
     color: "white",
-    height: 40,
+    height: 35,
     padding: "0 30px",
     boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
 
@@ -49,9 +51,10 @@ const Navbar = (props) => {
 
   return (
     <>
-      <div style={{ marginBottom: "25px" }}>
+      <div style={{ marginBottom: "10px" }}>
         <Box p={2} bgcolor="text.secondary">
           <Button
+            startIcon={<PlayCircleOutlineIcon />}
             mt={2}
             disabled={isdisabled}
             variant="contained"
@@ -64,6 +67,7 @@ const Navbar = (props) => {
             Start Sort
           </Button>
           <Button
+            startIcon={<SpeedIcon />}
             className={clsx(classes.myroot, className)}
             onClick={() => setToggleSpeed((toggleSpeed) => !toggleSpeed)}
           >
@@ -71,6 +75,7 @@ const Navbar = (props) => {
           </Button>
 
           <Button
+            startIcon={<AutorenewIcon />}
             color="secondary"
             variant="contained"
             onClick={() => {

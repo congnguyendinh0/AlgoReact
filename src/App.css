@@ -4,5 +4,11 @@
 body,
 html {
   box-sizing: border-box;
-  overflow: hidden;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: visible;
+  height: 100%;
+}
+h2 {
+  font-size: 18px;
 }
